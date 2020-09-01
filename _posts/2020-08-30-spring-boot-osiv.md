@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  spring boot OSIV
+title:  Spring boot OSIV
 tags: [spring, jpa, osiv]
 ---    
 
