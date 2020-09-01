@@ -15,7 +15,7 @@ url: "https://ppyong.github.io/"
 sass:
   sass_dir: _sass
 plainwhite:
-  name: Adam Denisov
+  name: 안지표
   tagline: Developer. Designer
   date_format: "%b %-d, %Y"
   sitemap: true # set to true to generate sitemap.xml content
@@ -26,9 +26,7 @@ plainwhite:
 
   # generate social links in footer
   social_links:
-    twitter: samarsault
-    github:  samarsault
-    linkedIn: in/samarsault
+    github: ppyong
     #rss: rss
     #dribbble: jekyll
     #flickr:   jekyll

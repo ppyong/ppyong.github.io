@@ -3,7 +3,7 @@ layout: post
 title: EFFECTIVE JAVA 3/E 4장-5장 요약
 ---
 
-# 4장 클래스와 인터페이스
+4장 클래스와 인터페이스
 
 ## 아이템15 - 클래스와 맴버의 접근 권한을 최소화하라   
 
@@ -161,7 +161,7 @@ class Dessert {
 한편 javac Main.java 나 javac Main.java Utensil.java 명령으로 컴파일하면 Dessert.java 파일을 작성하기 전처럼 pancake를 출력한다. 그러나 javac Dessert.java Main.java 명령으로 컴파일 하면 potpie를 출력한다. 이처럼 컴퍼일러에 어느 소스 파일을 먼저 건네느냐에 따라 동작이 달라지므로 반드시 바로 잡아야 할 문제다.    
 
 
-# 5장 제네릭
+5장 제네릭
 
 ## 아이템26 - 로 타입은 사용하지 말라    
 
