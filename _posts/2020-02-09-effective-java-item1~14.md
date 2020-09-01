@@ -4,7 +4,7 @@ title: EFFECTIVE JAVA 3/E 1장-3장 요약
 image: /img/hello_world.jpeg
 ---
 
-# 2장 객체 생성과 파괴 
+2장 객체 생성과 파괴 
 
 ## 아이템1 - 생성자 대신 정적 팩터리 메서드를 고려하라
 
@@ -172,7 +172,7 @@ static void copy(String src, String dst) throw IOException {
 
 <hr>
 
-# 3장 모든 객체의 공통 메서드 
+3장 모든 객체의 공통 메서드 
 
 ## 아이템10 - equals는 일반 규약을 지켜 재정의하라 
 
