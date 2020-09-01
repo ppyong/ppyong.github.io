@@ -4,11 +4,7 @@ title: SSL 동작 원리 및 관련 용어 정리
 tags: [ssl, tls, PKI]
 ---
 
-# SSL이란?    
-
-아래는 구글을 검색해서 나온 결과이다. 
-
-> SSL(Secure Socket Layer) 프로토콜은 처음에 Netscape사에서 웹서버와 브라우저 사이의 보안을 위해 만들었다. SSL은 Certificate Authority(CA)라 불리는 서드 파티로부터 서버와 클라이언트의 인증을 하는데 사용된다.    
+SSL(Secure Socket Layer) 프로토콜은 처음에 Netscape사에서 웹서버와 브라우저 사이의 보안을 위해 만들었다. SSL은 Certificate Authority(CA)라 불리는 서드 파티로부터 서버와 클라이언트의 인증을 하는데 사용된다.    
 
 그럼 이 SSL의 동작 원리를 이해하기 위해 알아야 하는 관련 개념 및 용어를 알아보자. 
 
