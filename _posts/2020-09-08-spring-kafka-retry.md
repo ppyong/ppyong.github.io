@@ -45,7 +45,6 @@ kafka:
 
 이 상황은 조금 더 Kafka에 대해 학습을 하고 이해할 수 있었습니다. 
 
-
 Spring Kafka 는 *설정을 하지 않는한 Listner 에서 문제가 발생 시 재시도를 하지 않습니다.* 그에 따라 계속 다음 데이터를 소비하게 되면서 OFFSET 은 증가하게 된 것이죠. 
 
 이 소비하는 시점만 하더라도 실제 Kafka에 commit 된 OFFSET은 여전히 100번이었습니다. 
@@ -55,11 +54,59 @@ Spring Kafka 는 *설정을 하지 않는한 Listner 에서 문제가 발생 시
 (참고로 Kafka 의 comsumer group 당 OFFSET 은 Topic 내에 저장됩니다.)
 
 
+그럼 어떻게 Listner에서 문제가 발생 시 재시도를 하게 할 수 있을까요? 
 
+Spring Kafka에서는 다양한 방법을 통해 재시도를 할 수 있는 기능을 제공하고 있습니다. 
 
+먼저 RetryTemplate와 RecoveryCallback을 이용한 방법 입니다.
 
+```java
+@Bean
+public RetryTemplate retryTemplate(){
+    RetryTemplate retryTemplate = new RetryTemplate();
 
+    FixedBackOffPolicy fixedBackOffPolicy = new FixedBackOffPolicy();
+    fixedBackOffPolicy.setBackOffPeriod(1000l);
 
+    SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
+    retryPolicy.setMaxAttempts(3);
+
+    retryTemplate.setRetryPolicy(retryPolicy);
+    retryTemplate.setBackOffPolicy(fixedBackOffPolicy);
+
+    return retryTemplate;
+}
+
+@Bean
+public ConsumerFactory<String, String> consumerFactory() {
+    Map<String, Object> props = new HashMap<>();
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, "ppyong-group1");
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+    return new DefaultKafkaConsumerFactory<>(props);
+}
+
+@Bean
+public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory(){
+    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    factory.setConsumerFactory(consumerFactory());
+    factory.setRetryTemplate(retryTemplate());
+    factory.setRecoveryCallback(i->{
+        log.info("consumer: {}", i.toString());
+        return null;
+    });
+    //factory.setErrorHandler(new SeekToCurrentErrorHandler());
+    return factory;
+}
+```
+
+위에 코드를 보면 알 수 있듯이 RetryTemplate를 통해 재시도 횟수 및 간격을 설정할 수 있습니다. 또한 이런 재시도가 모두 실패했을 경우 이후 동작은 RecoveryCallback을 통해 지정할 수 있습니다. 
+만약 위에 코드에서 RecoveryCallback이 설정되어 있지 않다면 Exception은 컨테이너에서 발생하고 되고 이런 Exception은 ErrorHandler를 통해 처리되게 됩니다. 
+
+하지만 위 코드상의 RetryTemplate를 사용한 재시도는 Consumer Thread를 일시적으로 중지 시킵니다. 그에 따라 max.poll.interval.ms(기본값 5 분)이 지나게 되면 해당 Broker는 할당된 파티션을 취소하고 재조정을 하게 됩니다. 
 
 
 
