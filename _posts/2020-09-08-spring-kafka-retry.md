@@ -28,7 +28,7 @@ kafka:
   ackmode: MANUAL
 ```
 
-그러던 중 Kafka에서 전달받은 데이터를 저장하는 데이터베이스에 문제가 생겨 Exception이 발생하게 되었습니다. 이 시기만해도 Kafka라는걸 처음 접해봤기에 당연히 실패한 OFFSET 머물러 있을 것이다라고 생각했습니다.  하지만 생각과는 다르게 동작하고 있는걸 데이터베이스가 복구되고나서야 알 수 있었습니다. 
+그러던 중 Kafka에서 전달받은 데이터를 저장하는 데이터베이스에 문제가 생겨 Exception이 발생하게 되었습니다. 이 시기만해도 Kafka라는걸 처음 접해봤기에 당연히 실패한 OFFSET에 머물러 있을 것이다라고 생각했습니다.  하지만 생각과는 다르게 동작하고 있는걸 데이터베이스가 복구되고나서야 알 수 있었습니다. 
 
 만약 100번 OFFSET 데이터를 소비하는 중에 Exception이 발생해서 더이상 진행을 못하면 당연히 100번 OFFSET 가르키고 있으니 데이터베이스만 복구하면 정상적으로 다시 100번 OFFSET 데이터를 소비하여 적재를 하겠지라고 생각하며 데이터베이스를 복구하였는데 데이터를 확인해보니 100번 OFFSET 데이터가 아닌 한참 지난 최신의 데이터가 데이터베이스에 적재되고 있었습니다. 
 
@@ -95,6 +95,8 @@ public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerCont
 만약 위에 코드에서 RecoveryCallback이 설정되어 있지 않다면 Exception은 컨테이너에서 발생하고 되고 이런 Exception은 ErrorHandler를 통해 처리되게 됩니다. 
 
 하지만 위 코드상의 RetryTemplate를 사용한 재시도는 Consumer Thread를 일시적으로 중지 시킵니다. 그에 따라 max.poll.interval.ms(기본값 5 분)이 지나게 되면 해당 Broker는 할당된 파티션을 취소하고 재조정을 하게 됩니다. 
+
+이런 문제는 ErrorHandler를 통해 해결할 수 있습니다. 정확히는 SeekToConcurrentErrorHandler를 통해 말이죠. 
 
 
 
