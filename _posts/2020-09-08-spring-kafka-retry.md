@@ -96,7 +96,18 @@ public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerCont
 
 하지만 위 코드상의 RetryTemplate를 사용한 재시도는 Consumer Thread를 일시적으로 중지 시킵니다. 그에 따라 max.poll.interval.ms(기본값 5 분)이 지나게 되면 해당 Broker는 할당된 파티션을 취소하고 재조정을 하게 됩니다. 
 
-이런 문제는 ErrorHandler를 통해 해결할 수 있습니다. 정확히는 SeekToConcurrentErrorHandler를 통해 말이죠. 
+이런 문제는 ErrorHandler를 통해 해결할 수 있습니다. 정확히는 SeekToConcurrentErrorHandler와 factory.setStatefulRetry()를 통해 말이죠. 
+Listener에서 Exception이 발생할 경우 recoveryCallback 이 없거나 recoveryCallback에도 Exception이 발생할 경우 설정된 ErrorHandler에서 처리하게 되는데요. 
+이때 동작 할 ErrorHandler를 SeekToConcurrentErrorHandler로 설정 해두면 Exception이 발생한 시점의 OFFSET으로 재시도를 하게 됩니다. 
+
+더불어 factory.setStatefulRetry 설정을 true로 하게되면 단순 재시도가 아닌 현재 Producer에서 가져온 데이터를 모두 버리고 OFFSET을 실패 지점으로 돌려 다시 소비하게 합니다. 
+
+그에 따라 max.poll.interval.ms 시간을 초과하여 재조정 되는 현상을 *거의* 없앨 수 있습니다. (정확히는 이렇게 해도 기본 각 retry 로직에서 시간을 초과하면 재조정은 이뤄지게 됩니다.) 
+
+
+
+
+
 
 
 
