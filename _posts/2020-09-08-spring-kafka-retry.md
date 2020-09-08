@@ -19,7 +19,7 @@ public void listen(String message, Acknowledgment ack){
     ack.acknowledge();
 }
 ```   
-&nbsp;    
+&ensp;   
 ```yaml
 kafka:
   enable:
