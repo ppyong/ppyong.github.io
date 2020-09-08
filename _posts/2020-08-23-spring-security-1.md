@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring security oauth2
-tags: [spring, security, oauth2]
+tags: [spring, security, OAuth2]
 ---    
 
 
