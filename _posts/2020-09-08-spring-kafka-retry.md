@@ -18,10 +18,8 @@ public void listen(String message, Acknowledgment ack){
     dataRepository.save(data);
     ack.acknowledge();
 }
-```
-      
-      
-      
+```   
+&nbsp;    
 ```yaml
 kafka:
   enable:
@@ -105,14 +103,4 @@ Listener에서 Exception이 발생할 경우 recoveryCallback 이 없거나 reco
 더불어 factory.setStatefulRetry 설정을 true로 하게되면 단순 재시도가 아닌 현재 Producer에서 가져온 데이터를 모두 버리고 OFFSET을 실패 지점으로 돌려 다시 소비하게 합니다. 
 
 그에 따라 max.poll.interval.ms 시간을 초과하여 재조정 되는 현상을 *거의* 없앨 수 있습니다. (정확히는 이렇게 해도 기본 각 retry 로직에서 시간을 초과하면 재조정은 이뤄지게 됩니다.) 
-
-
-
-
-
-
-
-
-
-
 
