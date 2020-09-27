@@ -32,7 +32,7 @@ Error:(7, 31) java: unreported exception java.io.FileNotFoundException; must be 
 Error:(8, 18) java: unreported exception java.io.IOException; must be caught or declared to be thrown
 ```
 
-위의 컴파일 에러를 처리하기 위해서는 위에서 설명한 대로 먼저 Exception 을 처리하는 방법입니다. 
+위의 컴파일 에러를 해결하기 위해 먼저 Exception 을 처리하는 방법입니다. 
 
 ```java
 public static void main(String[] args) {
@@ -48,7 +48,7 @@ public static void main(String[] args) {
 }
 ```
 
-try ~ catch 를 사용하여 Exception 을 처리할 수 있습니다. 
+위와 같이 try ~ catch 를 사용하여 Exception 을 처리할 수 있습니다. 
 
 이번에는 throws 를 통해 해당 메서드를 호출한 곳으로 Exception 을 던져서 해결해보겠습니다. 
 
@@ -62,12 +62,13 @@ public static void main(String[] args) throws IOException {
 
 다음으로 **UnChecked Exception** 입니다. 
 
-UnChecked Exception 은 컴파일 시에 체크되지 않습니다. 예외를 지정하고 처리하는 건 모두 프로그래머에게 달렸습니다. Exception 클래스의 자식 클래스인 RuntimeExcetion 하위 클래스, Error 클래스의 하위는 모두 UnChecked Exception 입니다. 그 외에는 Exception 의 다른 하위 클래스는 모두 Checked Exception 입니다. 
+UnChecked Exception 은 컴파일 시에 체크되지 않습니다. 예외를 지정하고 처리하는 건 모두 프로그래머에게 달렸습니다. Exception 클래스의 자식 클래스인 RuntimeExcetion 하위 클래스, Error 클래스의 하위는 모두 UnChecked Exception 입니다. 그 외 Exception 의 다른 하위 클래스는 모두 Checked Exception 입니다. 
 
 그럼 이 두가지 예외를 어떨 때 사용하면 될까요? 오라클 공식 문서에서는 아래와 같이 설명하고 있습니다. 
 
 ```
-If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
+If a client can reasonably be expected to recover from an exception, make it a checked exception. 
+If a client cannot do anything to recover from the exception, make it an unchecked exception.
 ```
 
 클라이언트가 예외를 복구할 수 있을 것으로 예상되는 상황에 Checked Exception 을 사용하고 클라이언트가 예외를 복구하기 위해 아무 것도 할 수 없는 경우 UnChecked Exception 을 사용한다고 합니다. 
@@ -75,4 +76,4 @@ If a client can reasonably be expected to recover from an exception, make it a c
 
 이는 UnChecked Exception 인 RuntimeException 의 경우 프로그래머의 실수에 의해서 발생하기 때문입니다. 이 경우 프로그램적으로 해결하기 보다는 적절하게 코드를 수정하는게 올바른 방법이기 때문입니다. 
 
-Checked Exception 의 경우 외부적인 요인 예로 사용자의 잟못된 프로그램 사용에 의해 발생하기 때문에 이런 상황에 대해 프로그램적으로 어떤식으로든 대처하도록 처리를 강제하는 것입니다. 
+Checked Exception 의 경우 외부적인 요인 예로 사용자의 잘못된 프로그램 사용에 의해 발생하기 때문에 이런 상황에 대해 프로그램적으로 어떤식으로든 대처하도록 처리를 강제하는 것입니다. 
