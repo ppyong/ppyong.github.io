@@ -60,7 +60,7 @@ sudo systemctl restart redis
 
 여기까지 진행 했다면 Redis는 클러스터 생성이 가능한 상태가 됩니다. 
 
-아래 커맨드를 통해 클러스터를 생성합니다. 아래 커맨드 기준 처음 3개의 노드가 master가 되고 나머지 3개의 노드는 slave가 됩니다. 그리고 --cluster-replicas 1의 설정에 의해 각각 마스터에는 slave가 1나씩 추가됩니다. 
+아래 커맨드를 통해 클러스터를 생성합니다. 아래 커맨드 기준 처음 3개의 노드가 master가 되고 나머지 3개의 노드는 slave가 됩니다. 그리고 --cluster-replicas 1의 설정에 의해 각각 마스터에는 slave가 하나씩 추가됩니다. 
 
 ```yaml
 redis-cli --cluster create xxx.xxx.xxx.xx:6379 xxx.xxx.xxx.xx:6379 xxx.xxx.xxx.xx:6379 xxx.xxx.xxx.xx:6379 xxx.xxx.xxx.xx:6379 xxx.xxx.xxx.xx:6379 --cluster-replicas 1
