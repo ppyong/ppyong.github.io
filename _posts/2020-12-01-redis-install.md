@@ -199,7 +199,7 @@ resource "aws_instance" "redis_master1" {
   tags = {
     Name = "redis_master1"
   }
-}
+} 
 
 resource "aws_instance" "redis_slave1" {
   ami           = "ami-03461b78fdba0ff9d"
