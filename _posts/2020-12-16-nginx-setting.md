@@ -40,7 +40,7 @@ sudo yum install -y nginx
 
 3. Nginx 설치가 완료되면 기본적으로 /etc/nginx 경로에 설치가 됩니다. 해당 위치로 이동하여 설정을 진행 합니다. 
 위 경로에 nginx.conf 파일의 내용은 아래와 같습니다. 대략 설정 내용의 의미는 주석을 통해 추가하였습니다. 
-
+    
 ```conf
 user  nginx; 
 worker_processes  1;
