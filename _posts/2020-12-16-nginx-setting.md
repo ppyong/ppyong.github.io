@@ -18,7 +18,7 @@ Nginx에서 REVERSE PROXY를 통해 앱서버 앞단의 L4로 넘기고 L4에서
 먼저 Nginx 설치부터 진행하도록 하겠습니다. 
 
 1. Nginx 설치를 위한 yum repository 추가 
-
+    
 ```bash
 sudo vi /etc/yum.repos.d/nginx.repo
 ```
@@ -33,7 +33,7 @@ enabled=1
 ```
 
 2. yum을 통해 Nginx 설치를 진행 합니다. 
-
+    
 ```bash
 sudo yum install -y nginx
 ```   
@@ -200,7 +200,7 @@ location /module {
 
 ```bash
 ln -s /etc/nginx/sites-available/web.ppyong.co.kr /etc/nginx/sites-enabled/web.ppyong.co.kr
-ln -s /etc/nginx/sites-available/app.ppyong.co.kr /etc/nginx/sites-enabled/web.ppyong.co.kr
+ln -s /etc/nginx/sites-available/app.ppyong.co.kr /etc/nginx/sites-enabled/app.ppyong.co.kr
 ```
 
 7. 설정을 마쳤으면 service nginx reload 를 통해 설정을 적용합니다. 
