@@ -17,7 +17,7 @@ Nginx에서 REVERSE PROXY를 통해 앱서버 앞단의 L4로 넘기고 L4에서
 
 먼저 Nginx 설치부터 진행하도록 하겠습니다. 
 
-1. Nginx 설치를 위한 yum repository 추가 
++ Nginx 설치를 위한 yum repository 추가 
     
 ```bash
 sudo vi /etc/yum.repos.d/nginx.repo
@@ -32,13 +32,13 @@ gpgcheck=0
 enabled=1
 ```
 
-2. yum을 통해 Nginx 설치를 진행 합니다. 
++ yum을 통해 Nginx 설치를 진행 합니다. 
     
 ```bash
 sudo yum install -y nginx
 ```   
 
-3. Nginx 설치가 완료되면 기본적으로 /etc/nginx 경로에 설치가 됩니다. 해당 위치로 이동하여 설정을 진행 합니다. 
++ Nginx 설치가 완료되면 기본적으로 /etc/nginx 경로에 설치가 됩니다. 해당 위치로 이동하여 설정을 진행 합니다. 
 위 경로에 nginx.conf 파일의 내용은 아래와 같습니다. 대략 설정 내용의 의미는 주석을 통해 추가하였습니다. 
     
 ```conf
@@ -85,7 +85,7 @@ http {
 
 예시로 웹서버 도메인은 "web.ppyong.co.kr", 앱서버 도메인은 "app.ppyong.co.kr"로 진행하도록 하겠습니다. 
 
-4. 앱서버 도메인에 대한 설정을 진행합니다. 
++ 앱서버 도메인에 대한 설정을 진행합니다. 
 
 ```conf
 server {
@@ -126,7 +126,7 @@ HTTP OPTION Method로 요청이 들어왔을 때는 CORS Preflight 처리를 위
 
 서로 다른 도메인에서 Custom 헤더를 설정한 요청일 경우 CORS 이슈가 발생하게 되는데, 해당 이슈 방지를 위해 위 설정과 같이 Origin Header를 추가하고 혹시나 Proxy로 설정한 앱서버에서 2XX Status 값이 아닌 다른 값으로 넘어올 경우에도 해당 헤더를 유지하기 위해 always를 추가 합니다. 
 
-5. 웹서버 도메인에 대한 설정을 진행합니다. 
++ 웹서버 도메인에 대한 설정을 진행합니다. 
 
 ```conf
 server {
@@ -196,12 +196,12 @@ location /module {
 
 위에 보시는거와 같이 root의 경우 location에 설정된 경로와 root 경로를 조합하여 응답을 내려주고, alias의 경우에는 요청에서 location에서 설정한 경로를 제외한 경로를 alias에서 찾아 응답을 내려주게 됩니다. 
 
-6. 생성한 설정들에 대해서 sites-enabled 디렉토리에 링크를 생성합니다. 
++ 생성한 설정들에 대해서 sites-enabled 디렉토리에 링크를 생성합니다. 
 
 ```bash
 ln -s /etc/nginx/sites-available/web.ppyong.co.kr /etc/nginx/sites-enabled/web.ppyong.co.kr
 ln -s /etc/nginx/sites-available/app.ppyong.co.kr /etc/nginx/sites-enabled/app.ppyong.co.kr
 ```
 
-7. 설정을 마쳤으면 service nginx reload 를 통해 설정을 적용합니다. 
++ 설정을 마쳤으면 service nginx reload 를 통해 설정을 적용합니다. 
 
