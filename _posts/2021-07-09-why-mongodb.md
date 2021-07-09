@@ -65,7 +65,7 @@ _MongoDB 와 RDBMS (MySQL)이 객체 이름이 조금 다르기에 아래와 같
 &nbsp;
 # 1. 아키텍쳐 
 
-<img src="https://ppyong.github.io/assets/img/mongodb-architecture.JPG" width="90%"> 
+<img src="https://ppyong.github.io/assets/img/mongodb-architecture.JPG" width="70%"> 
 
 # 2. 스토리지 
 > **2-1. WiredTiger의 내부 동작 방식** 
@@ -87,6 +87,8 @@ _MongoDB 와 RDBMS (MySQL)이 객체 이름이 조금 다르기에 아래와 같
 > **2-3. 하자드 포인터**
 
     - WiredTiger 스토리지 엔진은 모든 사용자 Thread는 캐시 데이터를 참조할 때 하자드 포인터에 자신이 참조하는 페이지를 등록한다. 이빅션 Thread는 제거 해도 될 페이지를 골라 삭제 전에 하자드 포인터에 등록되어 있는지 확인 후 등록되어 있지 않을 경우에만 제거한다. 이런 방식으로 잠금 대기 없이 임무를 수행할 수 있다. 
+
+<img src="https://ppyong.github.io/assets/img/harzard-pointer.jpg" width="70%">      
  
 > **2-4. 스킵 리스트**
 
