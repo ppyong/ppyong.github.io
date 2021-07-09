@@ -65,6 +65,8 @@ _MongoDB 와 RDBMS (MySQL)이 객체 이름이 조금 다르기에 아래와 같
 &nbsp;
 # 1. 아키텍쳐 
 
+<img src="https://ppyong.github.io/assets/img/mongodb-architecture.JPG" width="90%"> 
+
 # 2. 스토리지 
 > **2-1. WiredTiger의 내부 동작 방식** 
 
@@ -128,7 +130,7 @@ _MongoDB 와 RDBMS (MySQL)이 객체 이름이 조금 다르기에 아래와 같
         - Read Preference 옵션으로 Secondary에서 읽기 요청은 할 수 있지만 특정 세컨드리를 지정할 순 없음
         - 고가용성과 읽기 쿼리 부하 분산을 용도로 활용될 수 있지만 백업 용도와는 거리가 멀다. 사용자의 실수 등으로 인해서 Primary에서 유실된 데이터는 Secondary에서도 동일하게 유실된다.
     
-> **3-3. Avitor**    
+> **3-3. Aviter**    
 
     - 실제 사용자 데이터를 전혀 가지지 않고 프라이머리 멤버로부터 OpLog를 가져오지도 않는다. MongoDB에서는 특정 조건을 갖춰야 프라이머리 선출 가능하다. 정족수를 채우기 위한 추가 맴버
     
@@ -222,8 +224,9 @@ _MongoDB 와 RDBMS (MySQL)이 객체 이름이 조금 다르기에 아래와 같
 		    - 인덱스 생성
 
     - 실시간 복제 
-        
-<img src="/assets/img/real-time-copy.jpg" width="90%">        
+
+<img src="https://ppyong.github.io/assets/img/real-time-copy.jpg" width="90%">         
+
 
 # 4. 샤딩
 > **4-1. 샤딩 종류**    
