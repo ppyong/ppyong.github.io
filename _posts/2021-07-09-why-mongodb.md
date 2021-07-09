@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Nginx 설치와 설정 
+title: 왜 MongoDB인가? 
 ---
 
 해당 내용은 Real MongoDB책을 읽고 정리한 내용입니다. 추가로 책을 읽으면서 궁금한 것들도 추후 조사하기 위해 남겨뒀습니다 :) 
