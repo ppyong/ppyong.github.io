@@ -398,6 +398,7 @@ _MongoDB 와 RDBMS (MySQL)이 객체 이름이 조금 다르기에 아래와 같
 | Shared | O | X | O | X |
 | Exclusive | X | X | X | X |
 
+&nbsp;    
     - 글로벌, 데이터베이스, 컬렉션 오브젝트의 경우 MongoDB 서버가 할당 및 해제, 도큐먼트의 경우만 WiredTiger 스토리지 엔진이 담당
     - 잠금 Yield
         - 설정된 조건보다 오랜 시간 실행되거나 많은 자원을 소모하는 경우에는 잠깐 쉬었다가 다시 처리를 재개
