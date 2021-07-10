@@ -78,9 +78,9 @@ public class Member {
 
 <img src="https://ppyong.github.io/assets/img/non-identify.jpg" width="60%">
 
-- 복합 키
+## 복합 키
 
-@IdClass
+- @IdClass   
 
 ```java
 @IdClass(ParentId.class)
@@ -100,7 +100,7 @@ public class ParentId implements Serializable {
 }
 ```
 
-@EmbaeddedId
+- @EmbaeddedId   
 
 ```java
 @Entity
