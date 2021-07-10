@@ -179,7 +179,6 @@ public class ChildId implements Serializable {
 
     private String parent;
 
-
     private String childId;
 }
 
@@ -205,7 +204,7 @@ public class GrandChildId implements Serializable {
 
     private ChildId child;
 
-    private String childId;
+    private String idd;
 }
 ```    
 
