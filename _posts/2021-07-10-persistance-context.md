@@ -3,6 +3,8 @@ layout: post
 title: JPA 정리
 ---
 
+자바 ORM 표준 JPA 프로그래밍 책을 보며 잘 외워지지 않는 부분만 정리하였습니다. 
+
 ## 영속성 컨텍스트
 
 > 엔티티를 영구 저장하는 환경이라는 뜻. 엔티티 매니저를 생성할 때 하나 만들어지고, 매니저를 통해서 영속성 컨텍스트에 접근할 수 있다. 
@@ -142,6 +144,127 @@ public class ParentId implements Serializable {
 >- 기본 생성자가 있어야 한다.     
 >- 식별자 클래스는 public이어야 한다.    
 
-- 식별 관계 매핑 
+## 식별 관계 매핑    
 
 <img src="https://ppyong.github.io/assets/img/identifying-mapping.jpg" width="60%">
+
+- @IdClass   
+
+```java
+@Entity
+public class Parent { 
+    @Id
+    @Column(name="PARENT_ID1")
+    private String id; 
+
+    private String name;
+}
+
+@IdClass(ChildId.class)
+@Entity
+public class Child { 
+    @Id
+    @ManyToOne
+    @JoinColumn(name="PARENT_ID")
+    private Parent parent; 
+
+    @Id
+    @Column(name="CHILD_ID")
+    private String childId;
+
+    private String name;
+}
+
+public class ChildId implements Serializable { 
+
+    private String parent;
+
+
+    private String childId;
+}
+
+@IdClass(GrandChildId.class)
+@Entity
+public class GrandChild { 
+    @Id
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name="PARENT_ID"),
+        @JoinColumn(name="CHILD_ID")
+    })
+    private Child child; 
+
+    @Id
+    @Column(name="GRANDCHILD_ID")
+    private String id;
+
+    private String name;
+}
+
+public class GrandChildId implements Serializable { 
+
+    private ChildId child;
+
+    private String childId;
+}
+```    
+
+- @EmbeddedId   
+
+```java
+@Entity
+public class Parent { 
+    @Id
+    @Column(name="PARENT_ID1")
+    private String id; 
+
+    private String name;
+}
+
+@Entity
+public class Child { 
+    @EmbeddedId
+    private ChildId id;
+
+    @MapsId("parentId")
+    @ManyToOne
+    @JoinColumn(name="PARENT_ID")
+    public Parent parent;
+
+    private String name;
+}
+
+@Embeddable
+public class ChildId implements Serializable { 
+
+    private String parentId;
+
+    @Column(name="CHILD_ID")
+    private String childId;
+}
+
+@Entity
+public class GrandChild { 
+    @EmbeddedId
+    private GrandChildId id;
+    
+    @MapsId("childId")
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name="PARENT_ID"),
+        @JoinColumn(name="CHILD_ID")
+    })
+    public Child child
+
+    private String name;
+}
+
+@Embeddable
+public class GrandChildId implements Serializable { 
+
+    private ChildId child;
+
+    @Column(name="GRANDCHILD_ID")
+    private String id;
+}
+```    
