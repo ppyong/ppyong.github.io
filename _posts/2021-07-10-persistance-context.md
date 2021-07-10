@@ -34,3 +34,33 @@ title: JPA 정리
 - 삭제 (removed)
 
 > 엔티티를 영속성 컨텍스트와 데이터베이스에서 삭제한다. 
+
+## 일대다 단방향 [1:N]
+
+이 매핑은 반대쪽 테이블에 있는 외래키를 관리한다. 일대다 관계에서 외래 키는 항상 다쪽 테이블에 있다. 하지만 다 쪽인 Member 엔티티에는 외래 키를 매핑할 수 있는 참조 필드가 없다.
+
+```java
+@Entity 
+public class Team {
+    @Id @GeneratedValue
+    @Column(name="TEAM_ID")
+    private Long id;
+
+    private String name; 
+
+    @OneToMany
+    @JoinColumn(name="TEAM_ID")
+    private List<Member> mebers = new ArrayList<>();
+}
+
+@Entity
+public class Member {
+    @Id @GeneratedValue
+    @Column(name="MEMBER_ID")
+    private Long id;
+    
+    private String username;
+}
+```
+
+
