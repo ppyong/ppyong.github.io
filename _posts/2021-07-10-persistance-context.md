@@ -105,7 +105,8 @@ public class ParentId implements Serializable {
     private String id2;
 }
 ```    
-&nbsp;   
+&nbsp; 
+  
     @IdClass 를 사용할 때 식별자 클래스는 아래 조건을 만족해야 한다.
         1. 식별자 클래스의 속성명과 엔티티에서 사용하는 식별자의 속성명이 같아야 한다.
         2. Serializable 인터페이스를 구현해야 한다. 
@@ -134,6 +135,7 @@ public class ParentId implements Serializable {
 }
 ```    
 &nbsp;   
+    
     @EmbaddedId를 적용한 식별자 클래스는 아래 조건을 만족해야 한다. 
         1. 식별자 클래스의 속성명과 엔티티에서 사용하는 식별자의 속성명이 같아야 한다.
         2. Serializable 인터페이스를 구현해야 한다. 
