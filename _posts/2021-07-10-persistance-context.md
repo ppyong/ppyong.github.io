@@ -113,7 +113,6 @@ public class ParentId implements Serializable {
 >- 기본 생성자가 있어야 한다.     
 >- 식별자 클래스는 public이어야 한다.    
 
-&nbsp; 
 
 - @EmbaeddedId   
 
@@ -142,5 +141,3 @@ public class ParentId implements Serializable {
 >- equals, hashCode를 구현해야 한다.    
 >- 기본 생성자가 있어야 한다.     
 >- 식별자 클래스는 public이어야 한다.    
-
-&nbsp; 
