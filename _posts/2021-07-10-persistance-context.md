@@ -143,3 +143,5 @@ public class ParentId implements Serializable {
 >- 식별자 클래스는 public이어야 한다.    
 
 - 식별 관계 매핑 
+
+<img src="https://ppyong.github.io/assets/img/identifying-mapping.jpg" width="60%">
