@@ -86,7 +86,13 @@ public class Member {
 @IdClass(ParentId.class)
 @Entity
 public class Parent { 
-    private ParentId id; 
+    @Id
+    @Column(name="PARENT_ID1")
+    private String id1; 
+
+    @Id
+    @Column(name="PARENT_ID2")
+    private String id2;
 
     private String name;
 }
