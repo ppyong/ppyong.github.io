@@ -71,5 +71,9 @@ public class Member {
 - 식별 관계     
 \- 식별 관계는 부모 테이블의 기본 키를 내려받아서 자식 테이블의 기본 키 + 외래 키로 사용하는 관계다.
 
+<img src="https://ppyong.github.io/assets/img/identifying.jpg" width="70%">
+
 - 비식별 관계    
 \- 비식별 관계는 부모 테이블의 기본 키를 받아서 자식 테이블의 외래 키로만 사용하는 관계다.
+
+<img src="https://ppyong.github.io/assets/img/non-identify.jpg" width="70%">
