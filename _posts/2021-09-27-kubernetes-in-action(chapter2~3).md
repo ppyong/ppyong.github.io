@@ -126,7 +126,7 @@ kubectl port-forward kubia-manual 8888:8080
 
 > 포트 전달자를 통한 포드 연결 
 ```shell
-curl localhost:8080
+curl localhost:8888
 ```
 
 <img src="/assets/img/kubernetes-in-action-port-forward.png" width="90%">
@@ -136,9 +136,13 @@ curl localhost:8080
 
 <img src="/assets/img/kubernetes-in-action-label.png" width="90%">
 
+- 3.3.1 라벨 소개
 
+> 라벨은 리소스에 첨부하는 임의의 키/값 쌍이다. 라벨 셀렉터를 사용해 리소스를 선택할 때 활용된다. 리소스는 해당 라벨의 키가 해당 자원 내에서 고유한 경우 한 개 이상의 라벨을 가질 수 있다. 
 
+- 3.3.2 포드를 만들 때 라벨 지정하기 
 
+<img src="/assets/img/kubernetes-in-action-pod-create-label.png" width="90%">
 
 
 
