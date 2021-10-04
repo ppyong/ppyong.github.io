@@ -67,7 +67,7 @@ kubectl logs kubia-manual -c ${container명}
 >> - 함께 혹은 개별적으로 컨테이너의 크기가 조정돼야 하는가? 
 
 
-- ### YAML이나 JSON 파일 디스크립터에서 포드 만들기 
+- ### 3.2 YAML이나 JSON 파일 디스크립터에서 포드 만들기 
 
 - 3.2.1 포드의 YAML 디스크립터 검사
 
@@ -82,7 +82,7 @@ kubectl get po kubia-zxzij -o yaml
 >> - 상태에는 포드의 상태, 각 컨테이너의 설명 및 상태, 포드 내부의 IP 및 그 밖에의 기본 정보 등 실행 중인 포드의 현재 정보가 들어 있다. 
 
 - 3.2.2 포드의 간단한 YAML 디스크립터 만들기 
-
+>
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -181,6 +181,29 @@ kubectl label po kubia-manual creation_method=manual # kubia-manual 포드에 cr
 kubectl label po kubia-manual-v2 env=debug --overwrite # env=prod 라벨을 env=debug로 변경한다. 변경할 때는 --overwrite 옵션을 사용해야 한다 
 ```
 
+- ### 3.4 라벨 셀렉터를 통한 하위 집합 나열하기 
+> 라벨 셀렉터를 사용하면 특정 라벨로 태그가 지정된 포드의 하위 집합을 선택하고 해당 포드에서 작업을 수행할 수 있다. 
 
+> - 특정 키가 있는 라벨 포함
+> - 특정 키와 값이 있는 라벨 포함
+> - 특정 키가 있지만 지정한 값과 다른 값이 있는 라벨을 포함 
 
+- 3.4.1 라벨 셀렉터를 사용한 포드 나열 
 
+> creation_method=manual 라벨을 지정한 포드 
+```shell
+kubectl get po -l creation_method=manual
+```
+
+> env 라벨을 포함하는 모든 포드
+```shell
+kubectl get po -l env
+```
+
+> env 라벨이 없는 포드
+```shell
+kubectl get po -l '!env'
+```
+> - create_method!=manual 은 manual 이외의 다른 값으로 creation_method 라벨이 있는 포드를 선택한다. 
+> - env in (prod, devel) 은 env 라벨이 prod 또는 devel로 설정된 포드를 선택한다.
+> - env not in (prod, devel) 은 env 라벨이 prod 또는 devel이 아닌 다른 값으로 설정된 포드를 선택한다.
