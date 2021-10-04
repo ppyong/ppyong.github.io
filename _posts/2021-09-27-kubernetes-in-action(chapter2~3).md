@@ -1,45 +1,45 @@
 ---
 layout: post
-title: Kubernetes in action 2장~3장 정리
+title: Kubernetes in action 3장 정리
 ---
 
-- Docker 이미지 실행 
+> 포드에 여러 컨테이너가 포함돼 있을 때 항상 포드 전부가 단일 워커 노드에서 실행된다. 
 
-기존 컨테이너 이미지를 실행할 경우 아래와 같이 입력합니다. 실행할 명령어는 대게 이미지 자체에 구워지지만 원하는 경우 무시할 수 있습니다. 
+- 포드의 필요성
 
-ex) 
-ENTRYPOINT - 기본 값으로 동작하면 argument로는 대체되지 않고 append 된다. 
-아래와 같이 기존 Dockerfile에 ENTRYPOINT를 지정 후 실행 시 "docker run <image> node app2.js"로 실행 시 "node app.js node app2.js" 와 같이 실행된다.
+> - 관련 없는 여러 프로세스를 하나의 컨테이너에서 실행하는 경우 모든 프로세스를 실행 상태로 유지하고 로그를 관리하는 것은 사용자의 책임 
+> - 충돌이 발생한 경우 개별 프로세스를 자동으로 다시 시작하는 매커니즘을 포함 시켜야함 -> kubernetes 자체 기능이 아닌 직접 구현이 필요하다는 것을 의미한다.
+> - 모든 프로세스는 동일한 표준 출력으로 로그를 남기므로 어떤 프로세스가 어떤 내용을 기록했는지 파악하기 어려울 수 있다. 
 
-'''bash
-FROM node:7
-ADD app.js /app.js
-CMD ["node", "app.js"]
+-> 포드로 관리할 경우 특정 컨테이너의 로그만을 볼 수 있다. 
+'''shell
+kubectl logs kubia-manual -c ${container명} 
 '''
 
-CMD - 실행 시 argument를 주면 대체된다. 
-아래와 같이 기존 Dockerfile에 CMD를 지정하여도 실행 시 "docker run <image> node app2.js"로 실행 시 app2.js가 실행된다. 
+- 포드 
 
-'''bash
-FROM node:7
-ADD app.js /app.js
-CMD ["node", "app.js"]
-'''
+> 여러 컨테이너를 단일 단위로 관리할 수 있는 상위 레벨 구조가 필요하다. 컨테이너 포드는 밀접하게 연관된 프로세스를 함께 실행하고 마치 하나의 컨테이너에서 실행되는 것처럼 동일한 환경을 제공하면서 다소 격리된  상태로 유지한다. 포드의 모든 컨테이너는 동일한 네트워크 및 UTS 네임스페이스에서 실행되기 때문에 모두 같은 호스트 이름 및 네트워크 인터페이스를 공유한다. 
 
-'''bash
-$docker run <image>
-'''
+* UTS 네임스페이스 참고자료: https://www.44bits.io/ko/post/container-network-1-uts-namespace
 
-- Docker 이미지 버전 
+파일 시스템의 경우 각 컨테이너의 파일 시스템은 다른 컨테이너와 완전히 분리돼 있다. 
 
-도커는 동일한 이름의 여러 버전 또는 동일한 이미지의 다양한 버전을 지원합니다
-태그를 지정하지 않을 시 최신 태그를 참조하는 것으로 가정합니다. 
+- 컨테이너가 동일한 IP 및 포트 공간을 공유하는 방법 
 
-ex) docker run busybox 는 docker run busybox:latest 와 동일 
+> - 포드의 컨테이너가 동일한 네트워크에서 실행되므로 네임스페이스의 경우 같은 IP 주소와 포트 공간을 공유한다는 것이다. 따라서 동일한 포트 번호에 바인딩 될 경우 충돌이 발생한다. 
+> - 각 포드에는 별도의 공간이 있으므로 다른 포드의 컨테이너는 포트 충동을 일으킬 수 없다. 
+> - 포드 내부의 모든 컨테이너에 역시 동일한 루프백 네트워크 인터페이스 가지므로 컨테이너는 localhost로 동일한 포드에서 다른 컨테이너와 통신할 수 있다. 
 
-'''bash
-$docker run <image>:<tag>
-'''
+- 플랫 인터 포드 네트워크 소개 
+
+<img src="/assets/img/kubernetes-in-action-network-image1.png" width="90%">
+
+> 쿠버네티스 클러스터의 모든 포드는 공유된 단일 플랫, 네트워크 주소 공간에 위치하며 이는 모든 포드가 다른 포드의 IP 주소에 있는 다른 모든 포드에 액세스 할 수 있음을 의미한다. 
+> 랜상의 컴퓨터와 마찬가지로 각 포드는 자체 IP 주소를 가지며 포드 전용으로 설정된 네트워크를 통해 다른 모든 포드에서 액세스 할 수 있다. 
+
+<img src="/assets/img/k8s-network.png" width="90%">
+
+
 
 
 
