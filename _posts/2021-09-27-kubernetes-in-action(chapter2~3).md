@@ -131,6 +131,11 @@ curl localhost:8080
 
 <img src="/assets/img/kubernetes-in-action-port-forward.png" width="90%">
 
+- ### 3.3 라벨을 이용한 포드 구성 
+> 포드 수가 증가함에 따라 포드를 하위 집합으로 분류해야 한다는 점이 더욱 명확해진다. 조직화하는 매커니즘이 없다면 이해할 수 없는 복잡한 모양이 된다. 또한 각 포드에서 개별적으로 작업하지 않고 특정 그룹에 속한 모든 포드를 단일 작업으로 실행할 것이다. 
+
+<img src="/assets/img/kubernetes-in-action-label.png" width="90%">
+
 
 
 
