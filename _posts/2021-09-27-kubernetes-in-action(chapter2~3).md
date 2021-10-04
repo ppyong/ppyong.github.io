@@ -83,7 +83,19 @@ kubectl get po kubia-zxzij -o yaml
 
 - 3.2.2 포드의 간단한 YAML 디스크립터 만들기 
 
-<img src="/assets/img/kubernetes-in-action-kubia-manual.png" width="90%">
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: kubia-manunal
+spec:
+    containers:
+    - image: luksa/kubia
+      name: kubia
+      ports: 
+      - containerPort: 8080
+        protocol: TCP
+```
 
 > 컨테이너 포드 지정 
 >> 포드 정의에서 포트를 지정하는 것은 정보를 제공하려는 것이다. 포트를 생략해도 클라이언트가 포트를 통해 포드에 연결 가능 여부에는 영향을 미치지 않는다. 
@@ -142,7 +154,32 @@ curl localhost:8888
 
 - 3.3.2 포드를 만들 때 라벨 지정하기 
 
-<img src="/assets/img/kubernetes-in-action-pod-create-label.png" width="90%">
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: kubia-manunal-v2
+    labels:
+        creation_method: manual
+        env: prod
+spec:
+    containers:
+    - image: luksa/kubia
+      name: kubia
+      ports: 
+      - containerPort: 8080
+        protocol: TCP
+```
+
+- 3.3.3 포드의 라벨 수정 
+
+```shell
+kubectl label po kubia-manual creation_method=manual # kubia-manual 포드에 creation_method=manual 라벨을 붙인다 
+```
+
+```shell
+kubectl label po kubia-manual-v2 env=debug --overwrite # env=prod 라벨을 env=debug로 변경한다. 변경할 때는 --overwrite 옵션을 사용해야 한다 
+```
 
 
 
