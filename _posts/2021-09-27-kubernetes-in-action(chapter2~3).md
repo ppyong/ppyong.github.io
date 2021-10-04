@@ -21,7 +21,7 @@ kubectl logs kubia-manual -c ${container명}
 
 > 여러 컨테이너를 단일 단위로 관리할 수 있는 상위 레벨 구조가 필요하다. 컨테이너 포드는 밀접하게 연관된 프로세스를 함께 실행하고 마치 하나의 컨테이너에서 실행되는 것처럼 동일한 환경을 제공하면서 다소 격리된  상태로 유지한다. 포드의 모든 컨테이너는 동일한 네트워크 및 UTS 네임스페이스에서 실행되기 때문에 모두 같은 호스트 이름 및 네트워크 인터페이스를 공유한다. 파일 시스템의 경우 각 컨테이너의 파일 시스템은 다른 컨테이너와 완전히 분리돼 있다. 
 
-> * [utslinke]: https://www.44bits.io/ko/post/container-network-1-uts-namespace "UTS 네임스페이스 참고자료"
+> * [UTS 네임스페이스 참고자료] (https://www.44bits.io/ko/post/container-network-1-uts-namespace)
 
 - 컨테이너가 동일한 IP 및 포트 공간을 공유하는 방법 
 
@@ -44,8 +44,8 @@ kubectl logs kubia-manual -c ${container명}
 
 > 그에 대해 조사하고 위와 같은 그림을 그려보았다. 어떤식으로 이렇게 통신이 가능할까? 
 
-> 이를 위해서 CNI에 대한 이해가 필요하다. 
-> * [cnilink]: https://velog.io/@seunghyeon/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B5%AC%EC%84%B1%EB%8F%84 "CNI 참고자료"
+> 이를 위해서 CNI에 대한 이해가 필요하다.
+> * [CNI 참고자료] (https://velog.io/@seunghyeon/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B5%AC%EC%84%B1%EB%8F%84)
 
 - 3.1.3 컨테이너를 포드 전체에 적절하게 구성하기 
 
