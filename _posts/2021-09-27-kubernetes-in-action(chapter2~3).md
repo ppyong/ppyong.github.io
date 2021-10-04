@@ -44,7 +44,7 @@ kubectl logs kubia-manual -c ${container명}
 
 > 그에 대해 조사하고 위와 같은 그림을 그려보았다. 어떤식으로 이렇게 통신이 가능할까? 
 
-간략하게 설명하면 CNI별 동작은 다르지만 calico 기준 모든 노드의 포드를 위한 IP 대역을 생성하고 해당 대역의 subnet을 각 노드에 할당하게 된다. 그러면 각 노드는 해당 subnet 범위에서 IP를 할당받기 때문에 IP는 중복되지 않을 수 있다. 또한 각 노드에 Routing table 규칙을 추가하여 subnet 범위에 따른 노드 IP를 찾을 수 있게 해준다. 
+>> 간략하게 설명하면 CNI별 동작은 다르지만 calico 기준 모든 노드의 포드를 위한 IP 대역을 생성하고 해당 대역의 subnet을 각 노드에 할당하게 된다. 그러면 각 노드는 해당 subnet 범위에서 IP를 할당받기 때문에 IP는 중복되지 않을 수 있다. 또한 각 노드에 Routing table 규칙을 추가하여 subnet 범위에 따른 노드 IP를 찾을 수 있게 해준다. 
 
 > 이를 위해서 CNI에 대한 이해가 필요하다.
 > * [CNI 참고자료 - 1] (https://velog.io/@seunghyeon/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B5%AC%EC%84%B1%EB%8F%84)
