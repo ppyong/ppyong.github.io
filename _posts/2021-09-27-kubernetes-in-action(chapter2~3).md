@@ -83,7 +83,7 @@ kubectl get po kubia-zxzij -o yaml
 
 - 3.2.2 포드의 간단한 YAML 디스크립터 만들기 
 >
-```yaml
+```shell
 apiVersion: v1
 kind: Pod
 metadata:
@@ -154,7 +154,7 @@ curl localhost:8888
 
 - 3.3.2 포드를 만들 때 라벨 지정하기 
 
-```yaml
+```shell
 apiVersion: v1
 kind: Pod
 metadata:
