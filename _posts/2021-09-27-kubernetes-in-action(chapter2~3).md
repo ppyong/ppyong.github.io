@@ -64,7 +64,14 @@ kubectl logs kubia-manual -c ${container명}
 >> - 함께 혹은 개별적으로 컨테이너의 크기가 조정돼야 하는가? 
 
 
+- ### YAML이나 JSON 파일 디스크립터에서 포드 만들기 
 
+- 3.2.1 포드의 YAML 디스크립터 검사
+
+> kubectl get 명령과 -o yaml 옵션을 사용해 포드 전체의 YAML 정의를 가져온다. 
+```shell
+kubectl get po kubia-zxzij -o yaml
+```
 
 
 
